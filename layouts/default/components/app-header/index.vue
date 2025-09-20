@@ -7,12 +7,14 @@
       >
       <el-button plain @click="router.push('/login')">返回登录</el-button>
     </div>
-    <upload-dialog
-      :key="uploadDialogKey"
-      v-model:visible="isUploadDialogVisible"
-      :bucket="props.bucket"
-      :folder="props.folder"
-    />
+    <client-only>
+      <upload-dialog
+        :key="uploadDialogKey"
+        v-model:visible="isUploadDialogVisible"
+        :bucket="props.bucket"
+        :folder="props.folder"
+      />
+    </client-only>
   </header>
 </template>
 
