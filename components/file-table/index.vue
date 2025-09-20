@@ -11,8 +11,8 @@
       <template #default="scope">
         <el-image
           :class="styles.imagePreview"
-          :src="`${getFileRealUrl(scope.row.objectKey)}?&thumbnail=true`"
-          :preview-src-list="[getFileRealUrl(scope.row.objectKey)]"
+          :src="getFileRealUrl({objectKey: scope.row.objectKey, thumbnail: true})"
+          :preview-src-list="[getFileRealUrl({objectKey: scope.row.objectKey})]"
           preview-teleported
           hide-on-click-modal
           fit="cover"
@@ -72,20 +72,27 @@ const { refreshFileTree } = useRefreshFileTree();
 const { copy } = useClipboard();
 
 const handleCopyFileUrl = async (objectKey: string) => {
-  await copy(getFileRealUrl(objectKey));
+  await copy(getFileRealUrl({objectKey: objectKey}));
   ElMessage.success("已复制Url至剪贴板");
 };
 
 // http://remote/api/file?bucket=forum&object_key=abcccc/088afb14-3a15-11f0-b300-00163e7ed273.jpg
-const getFileRealUrl = (objectKey: string) => {
+const getFileRealUrl = (options: { objectKey: string; thumbnail?: boolean }) => {
+  const { objectKey, thumbnail = false } = options;
   const url = new URL(import.meta.env.VITE_API_URL);
   url.href = `${url.href}api/file`;
   url.searchParams.append("bucket", props.bucket);
   url.searchParams.append("object_key", objectKey);
+  if (thumbnail) {
+    url.searchParams.append("thumbnail", "true");
+  }
+
   return url.href;
 };
+
 const downloadFileByObjectKey = (objectKey: string, fileName: string) => {
-  const url = getFileRealUrl(objectKey);
+  const url = getFileRealUrl({objectKey: objectKey});
+
   ElMessage.success(`正在下载 ${fileName}`);
   downloadFile(url, fileName);
 };
