@@ -14,7 +14,7 @@
       />
       <el-button
         size="large"
-        :disabled="apiKey.length <= 0"
+        :disabled="apiKey?.length <= 0"
         :class="styles.loginButton"
         type="info"
         @click="handleConfirmAPIKey"
@@ -29,16 +29,25 @@ import { useQueryClient } from "@tanstack/vue-query";
 import { useRouter } from "vue-router";
 
 import LogoImage from "@/assets/logo.webp";
-import { useApiKey } from "@/composables/use-api-key";
 import { getBucket } from "~/services/service";
 
 import styles from "./index.module.scss";
-definePageMeta({
+import type {ElButton } from "element-plus";
+import { API_KEY_STORAGE_KEY } from "~/assets/constant";
+definePageMeta({ 
   layout: false
 });
+const apiKey = ref<string>("");
 
-const apiKey = useApiKey();
+onMounted(() => {
+  apiKey.value = localStorage.getItem(API_KEY_STORAGE_KEY) || "";
+})
 
+watch(apiKey, (newVal) => {
+  if(newVal) {
+    localStorage.setItem(API_KEY_STORAGE_KEY, newVal);
+  }
+})
 const router = useRouter();
 const queryClient = useQueryClient();
 const handleConfirmAPIKey = async () => {
