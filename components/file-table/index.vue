@@ -11,7 +11,7 @@
       <template #default="scope">
         <el-image
           :class="styles.imagePreview"
-          :src="getFileRealUrl(scope.row.objectKey)"
+          :src="`${getFileRealUrl(scope.row.objectKey)}?&thumbnail=true`"
           :preview-src-list="[getFileRealUrl(scope.row.objectKey)]"
           preview-teleported
           hide-on-click-modal
