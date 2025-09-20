@@ -28,7 +28,7 @@
 import { useQueryClient } from "@tanstack/vue-query";
 import { useRouter } from "vue-router";
 
-import LogoImage from "@/assets/logo.png";
+import LogoImage from "@/assets/logo.webp";
 import { useApiKey } from "@/composables/use-api-key";
 import { getBucket } from "~/services/service";
 
@@ -38,6 +38,7 @@ definePageMeta({
 });
 
 const apiKey = useApiKey();
+
 const router = useRouter();
 const queryClient = useQueryClient();
 const handleConfirmAPIKey = async () => {

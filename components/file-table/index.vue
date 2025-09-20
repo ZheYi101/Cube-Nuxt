@@ -89,6 +89,8 @@ const downloadFileByObjectKey = (objectKey: string, fileName: string) => {
   ElMessage.success(`正在下载 ${fileName}`);
   downloadFile(url, fileName);
 };
+
+/** 删除所选, 点击删除icon时触发 */
 const deleteSelectedFile = async (bucket: string, objectKey: string) => {
   try {
     await ElMessageBox.confirm("确定删除该文件?", "提示", {
