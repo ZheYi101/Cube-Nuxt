@@ -26,15 +26,15 @@
 </template>
 <script setup lang="ts">
 import { useQueryClient } from "@tanstack/vue-query";
+import type { ElButton } from "element-plus";
 import { useRouter } from "vue-router";
 
 import LogoImage from "@/assets/logo.webp";
+import { useApiKey } from "~/composables/use-api-key";
 import { getBucket } from "~/services/service";
 
 import styles from "./index.module.scss";
-import type {ElButton } from "element-plus";
-import { useApiKey } from "~/composables/use-api-key";
-definePageMeta({ 
+definePageMeta({
   layout: false
 });
 const apiKey = useApiKey();

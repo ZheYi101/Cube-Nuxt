@@ -11,8 +11,8 @@
       <template #default="scope">
         <el-image
           :class="styles.imagePreview"
-          :src="getFileRealUrl({objectKey: scope.row.objectKey, thumbnail: true})"
-          :preview-src-list="[getFileRealUrl({objectKey: scope.row.objectKey})]"
+          :src="getFileRealUrl({ objectKey: scope.row.objectKey, thumbnail: true })"
+          :preview-src-list="[getFileRealUrl({ objectKey: scope.row.objectKey })]"
           preview-teleported
           hide-on-click-modal
           fit="cover"
@@ -72,7 +72,7 @@ const { refreshFileTree } = useRefreshFileTree();
 const { copy } = useClipboard();
 
 const handleCopyFileUrl = async (objectKey: string) => {
-  await copy(getFileRealUrl({objectKey: objectKey}));
+  await copy(getFileRealUrl({ objectKey: objectKey }));
   ElMessage.success("已复制Url至剪贴板");
 };
 
@@ -91,7 +91,7 @@ const getFileRealUrl = (options: { objectKey: string; thumbnail?: boolean }) => 
 };
 
 const downloadFileByObjectKey = (objectKey: string, fileName: string) => {
-  const url = getFileRealUrl({objectKey: objectKey});
+  const url = getFileRealUrl({ objectKey: objectKey });
 
   ElMessage.success(`正在下载 ${fileName}`);
   downloadFile(url, fileName);
