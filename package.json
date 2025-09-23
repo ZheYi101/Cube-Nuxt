@@ -19,7 +19,7 @@
     "@nuxt/fonts": "^0.11.4",
     "@tanstack/vue-query": "^5.75.6",
     "@types/lodash-es": "^4.17.12",
-    "@vueuse/core": "^13.2.0",
+    "@vueuse/core": "^13.9.0",
     "axios": "^1.9.0",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",

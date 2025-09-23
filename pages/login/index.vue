@@ -33,21 +33,12 @@ import { getBucket } from "~/services/service";
 
 import styles from "./index.module.scss";
 import type {ElButton } from "element-plus";
-import { API_KEY_STORAGE_KEY } from "~/assets/constant";
+import { useApiKey } from "~/composables/use-api-key";
 definePageMeta({ 
   layout: false
 });
-const apiKey = ref<string>("");
+const apiKey = useApiKey();
 
-onMounted(() => {
-  apiKey.value = localStorage.getItem(API_KEY_STORAGE_KEY) || "";
-})
-
-watch(apiKey, (newVal) => {
-  if(newVal) {
-    localStorage.setItem(API_KEY_STORAGE_KEY, newVal);
-  }
-})
 const router = useRouter();
 const queryClient = useQueryClient();
 const handleConfirmAPIKey = async () => {
